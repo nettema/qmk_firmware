@@ -7,12 +7,13 @@
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
-#define _QW  0  //Qwerty layer
-#define _GM  1  //Gaming
-#define _RU  2  //Russian
-#define _RS  3  //RAISE
-#define _LW  4  //LOWER
-#define _CFG 5  //Config
+#define _QW   0  //Qwerty layer
+#define _GM   1  //Gaming
+#define _RU   2  //Russian
+#define _RS   3  //RAISE
+#define _LW   4  //LOWER
+#define _CFG  5  //Config
+#define _GMSP 6  //Gaming and soundpad
 
 
 // Layers combo
@@ -50,6 +51,19 @@
 #define BTON     RGB_M_B
 #define BTOFF    RGB_M_G
 
+//Tap Dance Declarations
+#define GUI_LNG  TD(TD_GUI_GUISPC)
+enum {
+  TD_GUI_GUISPC = 0
+};
+
+//Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+  //Tap once for Esc, twice for Caps Lock
+  [TD_GUI_GUISPC]  = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, G(KC_SPC))
+// Other declarations would go here, separated by commas, if you have them
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*
    *  q       w     e       r          t              ||            y        u       i     o    p
@@ -61,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,     KC_W,    KC_E,    KC_R,   KC_T,                    KC_Y,    KC_U,   KC_I,    KC_O,    KC_P ,
     KC_A,     KC_S,    KC_D,    KC_F,   KC_G,                    KC_H,    KC_J,   KC_K,    KC_L,    KC_SCLN ,
     KC_Z,     KC_X,    KC_C,    KC_V,   KC_B,                    KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_LBRC ,
-    KC_LCTL,  KC_LGUI, KC_LALT, RS_ESC, SH_SPC, LW_DEL, LW_ENT,  SH_BSPC, RS_TAB, KC_SLSH, KC_RBRC, KC_QUOT
+    KC_LCTL,  GUI_LNG, KC_LALT, RS_TAB, SH_SPC, LW_DEL, LW_ENT,  SH_BSPC, RS_ESC, KC_SLSH, KC_RBRC, KC_QUOT
     ),
   /*
    *  esc`  q  w  e   r             ||              y      u    i    o     p
@@ -73,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GESC, KC_Q,    KC_W, KC_E, KC_R,                   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_TAB,  KC_A,    KC_S, KC_D, KC_F,                   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
     KC_LSFT, KC_Z,    KC_X, KC_C, KC_V,                   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
-    KC_LCTL, KC_LALT, KC_T, KC_G, KC_SPC, SH_SPC, LW_ENT, SH_BSPC, RS_DEL,  KC_GRV,  TO(_QW), TG(_RU)
+    KC_LCTL, KC_LALT, KC_T, KC_G, KC_SPC, SH_SPC, LW_ENT, SH_BSPC, TG(_GMSP),  KC_GRV,  TO(_QW), TG(_RU)
     ),
   /*
    *  Й       Ц     У       К          Е              ||            Н        Г       Ш     Щ    З
@@ -85,12 +99,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P ,
    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_LBRC ,
-   KC_LCTL, KC_LGUI, KC_LALT, RS_ESC,  SH_SPC,  LW_DEL,  LW_ENT,  SH_BSPC, RS_TAB,  KC_SLSH, KC_QUOT, TG(_RU)
+   KC_LCTL, KC_LGUI, KC_LALT, RS_TAB,  SH_SPC,  LW_DEL,  LW_ENT,  SH_BSPC, RS_ESC,  KC_SLSH, KC_QUOT, TG(_RU)
    ),
   /*
    *  !       @      up     {    }          ||           -     7     8     9    *
    *  #     left    down  right  $          ||           _     4     5     6    +
-   *  [       ]      (      )    &          ||           `     1     2     3    \
+   *  [       ]      (      )    &          ||           `~    1     2     3    \
    * ctrl   super   alt     fn  spc del(lw) || ent(lw)  bksp   fn    .     0     =
    */
   [_RS] = LAYOUT( /* [> RAISE <] */
@@ -109,7 +123,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,                   KC_PIPE, KC_F7,   KC_F8,   KC_F9,    KC_F10  ,
     KC_DEL,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   KC_DQT,  KC_F4,   KC_F5,   KC_F6,    KC_F11  ,
     RGB_MOD, RGB_HUD, KC_VOLD, KC_VOLU, RESET,                     RGB_TOG, KC_F1,   KC_F2,   KC_F3,    KC_F12  ,
-    KC_LCTL, KC_LGUI, KC_LALT, RS_ESC,  SH_SPC,  KC_TRNS, KC_TRNS, SH_BSPC, RS_TAB,  KC_PSCR, TG(_CFG), TO(_GM)
+    KC_LCTL, KC_LGUI, KC_LALT, RS_TAB,  SH_SPC,  KC_TRNS, KC_TRNS, SH_BSPC, RS_ESC,  KC_PSCR, TG(_CFG), TO(_GM)
+    ),
+  /*
+   *  insert  home    up      end     pgup        ||       |         F7     F8    F9     F10
+   *   del    left   down    right    pgdn        ||       "         F4     F5    F6     F11
+   *   rgb+   HUE+   voldn   volup    reset       ||      rgbOn      F1     F2    F3     F12
+   *   ctrl  super    alt   esc(rs)  space(sh) fn || fn  bksp(sh)  tab(rs) prtsc Config Gaming
+   */
+  [_GMSP] = LAYOUT( /* [> LOWER <] */
+    KC_GESC, KC_Q,    KC_W, KC_E, KC_R,                   KC_Y,    KC_F13,  KC_F14,  KC_F15,  KC_F16  ,
+    KC_TAB,  KC_A,    KC_S, KC_D, KC_F,                   KC_H,    KC_F17,  KC_F18,  KC_F19,  KC_F20 ,
+    KC_LSFT, KC_Z,    KC_X, KC_C, KC_V,                   KC_N,    KC_F21,  KC_F22,  KC_F23,  KC_F24 ,
+    KC_LCTL, KC_LALT, KC_T, KC_G, KC_SPC, SH_SPC, LW_ENT, SH_BSPC, TG(_GMSP),  KC_GRV,  TO(_QW), TG(_RU)
     ),
   /*
    * BT_Auto  RGB_On  Bright+   HUE+     SAT+           ||         SCRL_Up      LMB       M_Up       RMB       MMB
@@ -121,5 +147,5 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     BTAUTO,  RGB_TOG,   RGB_VAI,  RGB_HUI,  RGB_SAI,                   KC_WH_U,      KC_BTN1,   KC_MS_U,      KC_BTN2,    KC_BTN3  ,
     BTOFF,   RGB_RMOD,  RGB_VAD,  RGB_MOD,  RGB_SAD,                   KC_WH_D,      KC_MS_L,   KC_MS_D,      KC_MS_R,    KC_BTN4  ,
     BTON,    KC_VOLU,   KC_CAPS,  KC_NO,    RESET,                     KC_MS_ACCEL0, KC_WH_L,   KC_MS_ACCEL1, KC_WH_R,    KC_BTN5  ,
-    KC_MUTE, KC_VOLD,   KC_NO,    RS_ESC,   SH_SPC,   LW_DEL, LW_ENT,  SH_BSPC,      RS_TAB,    TO(_QW),      TG(_CFG),   TO(_GM)  ),
+    KC_MUTE, KC_VOLD,   KC_NO,    RS_TAB,   SH_SPC,   LW_DEL, LW_ENT,  SH_BSPC,      RS_ESC,    TO(_QW),      TG(_CFG),   TO(_GM)  ),
 };

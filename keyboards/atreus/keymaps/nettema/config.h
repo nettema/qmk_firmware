@@ -69,4 +69,7 @@ the Free Software Foundation, either version 2 of the License, or
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 0
 
+/* Tap Dance key settins */
+//#define TAPPING_TERM 175 // TAPPING_TERM is the maximum time allowed between taps of your Tap Dance key
+
 #endif
