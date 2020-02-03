@@ -64,7 +64,7 @@ BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 AUDIO_ENABLE = no           # Audio output on port C6
 FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
 HD44780_ENABLE = no 		# Enable support for HD44780 based LCDs (+400)
-
+TAP_DANCE_ENABLE = yes		# Enable support for tap dance (+1000)
 
 # Bluetooth settings
 # F_CPU = 8000000
