@@ -54,13 +54,28 @@
 //Tap Dance Declarations
 #define GUI_LNG  TD(TD_GUI_GUISPC)
 enum {
-  TD_GUI_GUISPC = 0
+  TD_GUI_GUISPC = 0,
+  U_F13,  I_F14,    O_F15,    P_F16,
+  J_F17,  K_F18,    L_F19,    SC_F20,
+  M_F21,  COM_F22,  DOT_F23,  SH_F24
 };
 
 //Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
   //Tap once for Esc, twice for Caps Lock
   [TD_GUI_GUISPC]  = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, G(KC_SPC))
+  ,[U_F13]  = ACTION_TAP_DANCE_DOUBLE(KC_U, KC_F13)
+  ,[I_F14]  = ACTION_TAP_DANCE_DOUBLE(KC_I, KC_F14)
+  ,[O_F15]  = ACTION_TAP_DANCE_DOUBLE(KC_O, KC_F15)
+  ,[P_F16]  = ACTION_TAP_DANCE_DOUBLE(KC_P, KC_F16)
+  ,[J_F17]  = ACTION_TAP_DANCE_DOUBLE(KC_J, KC_F17)
+  ,[K_F18]  = ACTION_TAP_DANCE_DOUBLE(KC_K, KC_F18)
+  ,[L_F19]  = ACTION_TAP_DANCE_DOUBLE(KC_L, KC_F19)
+  ,[SC_F20]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_F20)
+  ,[M_F21]  = ACTION_TAP_DANCE_DOUBLE(KC_M, KC_F21)
+  ,[COM_F22]  = ACTION_TAP_DANCE_DOUBLE(KC_COMM, KC_F22)
+  ,[DOT_F23]  = ACTION_TAP_DANCE_DOUBLE(KC_DOT, KC_F23)
+  ,[SH_F24]  = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_F24)
 // Other declarations would go here, separated by commas, if you have them
 };
 
@@ -84,9 +99,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *  CTL  ALT T  G space space(rs) || enter(rs) bksp(sh) del  `~   QWER  RUS
    */
   [_GM] = LAYOUT( /* Gaming */
-    KC_GESC, KC_Q,    KC_W, KC_E, KC_R,                   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
-    KC_TAB,  KC_A,    KC_S, KC_D, KC_F,                   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_LSFT, KC_Z,    KC_X, KC_C, KC_V,                   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
+    KC_GESC, KC_Q,    KC_W, KC_E, KC_R,                   KC_Y,    TD(U_F13),  TD(I_F14),  TD(O_F15),  TD(P_F16)  ,
+    KC_TAB,  KC_A,    KC_S, KC_D, KC_F,                   KC_H,    TD(J_F17),  TD(K_F18),  TD(L_F19),  TD(SC_F20) ,
+    KC_LSFT, KC_Z,    KC_X, KC_C, KC_V,                   KC_N,    TD(M_F21),  TD(COM_F22),TD(DOT_F23),TD(SH_F24) ,
     KC_LCTL, KC_LALT, KC_T, KC_G, KC_SPC, SH_SPC, LW_ENT, SH_BSPC, TG(_GMSP),  KC_GRV,  TO(_QW), TG(_RU)
     ),
   /*
