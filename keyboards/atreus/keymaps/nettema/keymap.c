@@ -161,6 +161,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_CFG] = LAYOUT( /* Media layout */
     BTAUTO,  RGB_TOG,   RGB_VAI,  RGB_HUI,  RGB_SAI,                   KC_WH_U,      KC_BTN1,   KC_MS_U,      KC_BTN2,    KC_BTN3  ,
     BTOFF,   RGB_RMOD,  RGB_VAD,  RGB_MOD,  RGB_SAD,                   KC_WH_D,      KC_MS_L,   KC_MS_D,      KC_MS_R,    KC_BTN4  ,
-    BTON,    KC_VOLU,   KC_CAPS,  KC_NO,    RESET,                     KC_MS_ACCEL0, KC_WH_L,   KC_MS_ACCEL1, KC_WH_R,    KC_BTN5  ,
+    BTON,    KC_VOLU,   KC_CAPS,  EEP_RST,    RESET,                     KC_MS_ACCEL0, KC_WH_L,   KC_MS_ACCEL1, KC_WH_R,    KC_BTN5  ,
     KC_MUTE, KC_VOLD,   KC_NO,    RS_TAB,   SH_SPC,   LW_DEL, LW_ENT,  SH_BSPC,      RS_ESC,    TO(_QW),      TG(_CFG),   TO(_GM)  ),
 };
