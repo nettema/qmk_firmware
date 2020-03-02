@@ -88,6 +88,10 @@ extern layer_state_t layer_state;
 #    include "process_music.h"
 #endif
 
+#ifdef BACKLIGHT_ENABLE
+#    include "process_backlight.h"
+#endif
+
 #ifdef LEADER_ENABLE
 #    include "process_leader.h"
 #endif
@@ -136,6 +140,10 @@ extern layer_state_t layer_state;
 
 #ifdef MAGIC_KEYCODE_ENABLE
 #    include "process_magic.h"
+#endif
+
+#ifdef GRAVE_ESC_ENABLE
+#    include "process_grave_esc.h"
 #endif
 
 #if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
